@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <style>
+        #div1{
+            text-align: center;
+            margin-top: 100px;
+        }
+        table{
+            width: 50%;
+            border: 1px solid;
+            margin: auto;
+        }
+        td,th{
+            text-align: center;
+            border: 1px solid;
+        }
+    </style>
+
+</head>
+<body>
+<div id="div1">
+    编号<input type="text" id="id">
+    姓名<input type="text" id="name">
+    性别<input type="text" id="gender">
+    <input type="button" id="btn_sub" value="提交">
+</div>
+<hr>
+<div id="div2">
+    <table>
+        <caption>学生信息表</caption>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>操作</th>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>令狐冲</td>
+            <td>男</td>
+            <td><a href="javascript:void(0)" onclick="delTr(this);">删除</a></td>
+        </tr>
+    </table>
+</div>
+<script>
+    document.getElementById("btn_sub").onclick = function () {
+        var id = document.getElementById("id").value;
+        var name = document.getElementById("name").value;
+        var gender = document.getElementById("gender").value;
+        var td_id = document.createElement("td");
+        var td_name = document.createElement("td");
+        var td_gender = document.createElement("td");
+        td_id.appendChild(document.createTextNode(id));
+        td_name.appendChild(document.createTextNode(name));
+        td_gender.appendChild(document.createTextNode(gender));
+        var table = document.getElementsByTagName("table")[0];
+        var tr = document.createElement("tr");
+        tr.appendChild(td_id);
+        tr.appendChild(td_name);
+        tr.appendChild(td_gender);
+        //创建提交按钮
+        var td_a = document.createElement("td");
+        var text_a = document.createTextNode("删除");
+        var ele_a = document.createElement("a");
+        ele_a.setAttribute("href","Javascript:void(0)")
+        ele_a.appendChild(text_a);
+        ele_a.setAttribute("onclick","delTr(this);")
+        td_a.appendChild(ele_a);
+        tr.appendChild(td_a);
+        table.appendChild(tr);
+    }
+    function delTr(obj){          //删除当前表单所在行
+        var table = obj.parentNode.parentNode.parentNode;
+        var tr = obj.parentNode.parentNode;
+        table.removeChild(tr);
+    }
+
+</script>
+
+</body>
+</html>
