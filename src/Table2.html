@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table2</title>
+    <style>
+        #div1{
+            text-align: center;
+            margin-top: 100px;
+        }
+        table{
+            width: 30%;
+            border: 1px solid;
+            margin-left: 35%;
+        }
+        td,th{
+            border: 1px solid black;
+            text-align: center;
+        }
+        #div2{
+            margin-left: 35%;
+            margin-top: 10px;
+        }
+        .over{
+            background-color: pink;
+        }
+        .out{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+<table>
+    <caption>学生信息表</caption>
+    <tr>
+        <th><input type="checkbox" name="cb" id="fcb" onclick="first_cb();"></th>
+        <th id="id">编号</th>
+        <th id="name">姓名</th>
+        <th id="gender">性别</th>
+        <th id="delete">操作</th>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" name="cb"></td>
+        <td>1</td>
+        <td>令狐冲</td>
+        <td>男</td>
+        <td><a href="javascript:void(0)" onclick="delTr(this);">删除</a></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" name="cb"></td>
+        <td>2</td>
+        <td>任我行</td>
+        <td>男</td>
+        <td><a href="javascript:void(0)" onclick="delTr(this);">删除</a></td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox" name="cb"></td>
+        <td>3</td>
+        <td>岳不群</td>
+        <td>?</td>
+        <td><a href="javascript:void(0)" onclick="delTr(this);">删除</a></td>
+    </tr>
+</table>
+</div>
+<div id="div2">
+    <input type="button" id="btn1" value="全选" onclick="btn_1();">
+    <input type="button" id="btn2" value="全不选" onclick="btn_2();">
+    <input type="button" id="btn3" value="反选" onclick="btn_3();">
+</div>
+<script>
+    function delTr(obj) {
+        var table = obj.parentNode.parentNode.parentNode;
+        var tr = obj.parentNode.parentNode;
+        table.removeChild(tr);
+    }
+    function btn_1(){
+        var cbs = document.getElementsByName("cb");
+        for(var i=0;i<cbs.length;i++){
+            cbs[i].checked = true;
+        }
+    }
+    function btn_2(){
+        var cbs = document.getElementsByName("cb");
+        for(var i=0;i<cbs.length;i++){
+            cbs[i].checked = false;
+        }
+    }
+    function btn_3(){
+        var cbs = document.getElementsByName("cb");
+        var flag =true;
+        for(var i=1;i<cbs.length;i++){
+            cbs[i].checked = !cbs[i].checked;
+            if(cbs[i].checked == false) flag = false;
+        }
+        if(flag) cbs[0].checked = true;
+        else cbs[0].checked = false;
+    }
+    function first_cb() {
+        var fcb = document.getElementById("fcb");
+        var cbs = document.getElementsByName("cb");
+        for(var i=1;i<cbs.length;i++){
+            cbs[i].checked = fcb.checked;
+        }
+    }
+    var trs = document.getElementsByTagName("tr");
+    for(var i=0;i<trs.length;i++){
+        //当鼠标移到某表行上时
+        trs[i].onmouseover = function () {
+            this.className = "over";
+        }
+        //移出时
+        trs[i].onmouseout = function () {
+            this.className = "out";
+        }
+    }
+</script>
+
+</body>
+</html>
